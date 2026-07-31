@@ -8,6 +8,7 @@
 .character-button { touch-action:manipulation; }
 .character-button { background:#fffdfa!important; border-radius:0!important; clip-path:none!important; }
 .stage-card { border-radius:0!important; }
+.party-hp { margin-top:-7px!important; }.party-hp em { background:linear-gradient(90deg,#4c99d7,#83ddff)!important; box-shadow:0 0 14px #67cfff!important; }.battle-effect.boss { top:30%; background:#4d2130; color:#ffd9d9; border:1px solid #e06d71; }.battle-effect.defeat { top:24%; background:#311d31; color:#ffd4dd; border:1px solid #b66478; }.defeat-panel { margin-top:8px; padding:18px; border:1px solid #b66478; border-radius:18px; background:#311d31; color:#ffdce1; }.defeat-panel span,.defeat-panel b,.defeat-panel small { display:block; }.defeat-panel span { font-size:27px; }.defeat-panel b { margin:3px 0; font-size:18px; }.defeat-panel small { font-size:12px; }.defeat-panel button { margin:13px 4px 0; padding:10px 16px; border:0; border-radius:11px; background:#c25767; color:#fff; cursor:pointer; font-weight:800; }.defeat-panel .return-button { background:#6d556a; }
 .rays,.halo { display:none!important; }
 .character-button { outline:none!important; -webkit-tap-highlight-color:transparent!important; background:transparent!important; overflow:visible!important; clip-path:polygon(39% 7%,58% 7%,70% 17%,74% 34%,69% 48%,78% 67%,69% 94%,32% 94%,21% 68%,30% 49%,25% 33%,29% 17%)!important; }
 .evolution-sprite { mix-blend-mode:multiply!important; }
