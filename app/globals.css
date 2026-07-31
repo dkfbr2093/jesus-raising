@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* Phone-first presentation: show only the current goal, not the full route. */
+.game-shell { padding-bottom:calc(126px + env(safe-area-inset-bottom)) !important; -webkit-tap-highlight-color:transparent; }
+.evolution { display:none !important; }
+.game-grid { display:block !important; max-width:680px !important; min-height:0 !important; }
+.bottom-dock { bottom:calc(10px + env(safe-area-inset-bottom)) !important; }
+.character-button { touch-action:manipulation; }
+/* A short, bright burst of confetti accompanies each newly unlocked form. */
+.is-evolving .character-button::after { content:""; position:absolute; z-index:8; pointer-events:none; left:50%; top:44%; width:12px; height:12px; border-radius:2px; background:#ff6c5e; box-shadow:-154px -125px #ffce53,-112px -172px #64c7ff,-64px -132px #aa7bff,26px -182px #5fd49c,78px -142px #ff7cbe,142px -112px #ffce53,-174px -35px #64c7ff,-104px -59px #ff7cbe,116px -46px #aa7bff,176px 8px #5fd49c,-154px 88px #ffce53,-67px 112px #64c7ff,43px 103px #ff7cbe,138px 79px #aa7bff; animation:confetti-pop 1.45s ease-out both; }
+@keyframes confetti-pop { 0% { opacity:0; transform:translate(-50%,0) scale(.2) rotate(0deg); } 16% { opacity:1; } 100% { opacity:0; transform:translate(-50%,155px) scale(1.25) rotate(290deg); } }
+
 /* Game refresh: keep the store available from a compact fixed dock. */
 .game-shell { padding-bottom:124px !important; }
 .game-grid { max-width:1120px !important; grid-template-columns:270px minmax(420px,1fr) !important; }

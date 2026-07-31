@@ -46,9 +46,9 @@ export default function Home() {
 
   const clickPower = 1 + upgrades.reduce((sum, item) => sum + (item.click ?? 0) * (levels[item.id] ?? 0), 0);
   const passivePower = upgrades.reduce((sum, item) => sum + (item.passive ?? 0) * (levels[item.id] ?? 0), 0);
-  const stageIndex = stages.reduce((current, stage, index) => (love >= stage.love ? index : current), 0);
-  const stage = stages[stageIndex];
-  const nextStage = stages[stageIndex + 1];
+  const stageIndex = stages.reduce((current, stage, index) => (love >= stage.love * 2 ? index : current), 0);
+  const stage = { ...stages[stageIndex], love: stages[stageIndex].love * 2 };
+  const nextStage = stages[stageIndex + 1] ? { ...stages[stageIndex + 1], love: stages[stageIndex + 1].love * 2 } : undefined;
   const progress = nextStage ? ((love - stage.love) / (nextStage.love - stage.love)) * 100 : 100;
 
   useEffect(() => {
