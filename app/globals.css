@@ -82,10 +82,11 @@ button { font: inherit; }
 .battle-field { grid-template-columns:minmax(0,1fr) 42px minmax(0,1fr); min-height:264px; }
 .party-side,.boss-side { height:238px; overflow:hidden; isolation:isolate; }
 .battle-jesus {
-  left:4%; bottom:18px; width:185px; height:185px; max-width:96%; aspect-ratio:1;
+  left:4%; bottom:18px; width:min(185px,96%); height:auto; aspect-ratio:1;
   background-image:url('/jesus-battle-sprite.png') !important;
   background-size:200% 500% !important; background-repeat:no-repeat !important;
 }
+.battle-angels { display:none !important; }
 .battle-demon {
   right:0; bottom:15px; width:min(100%,220px); height:220px; max-height:calc(100% - 26px);
   aspect-ratio:1; background-repeat:no-repeat; background-size:600% 600%;
@@ -95,7 +96,7 @@ button { font: inherit; }
   .battle-arena { padding:16px 10px 12px; }
   .battle-field { grid-template-columns:minmax(0,1fr) 27px minmax(0,1fr); min-height:184px; margin:4px 0 8px; }
   .party-side,.boss-side { height:178px; }
-  .battle-jesus { left:0; bottom:21px; width:112px; height:112px; max-width:100%; }
+  .battle-jesus { left:0; bottom:21px; width:min(112px,100%); height:auto; }
   .battle-demon { right:0; bottom:21px; width:132px; height:132px; max-width:100%; max-height:132px; }
   .versus { width:26px; height:26px; margin-bottom:53px; font-size:8px; }
   .party-side small,.boss-side small { bottom:2px; font-size:8px; }
