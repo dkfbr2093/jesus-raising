@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Upgrade = {
   id: string;
@@ -39,7 +39,10 @@ export default function Home() {
   const [love, setLove] = useState(0);
   const [levels, setLevels] = useState<Record<string, number>>({});
   const [popups, setPopups] = useState<{ id: number; x: number; y: number; amount: number }[]>([]);
+  const [shopOpen, setShopOpen] = useState(false);
+  const [evolutionBurst, setEvolutionBurst] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const previousStage = useRef(0);
 
   const clickPower = 1 + upgrades.reduce((sum, item) => sum + (item.click ?? 0) * (levels[item.id] ?? 0), 0);
   const passivePower = upgrades.reduce((sum, item) => sum + (item.passive ?? 0) * (levels[item.id] ?? 0), 0);
@@ -71,6 +74,21 @@ export default function Home() {
     return () => window.clearInterval(timer);
   }, [passivePower]);
 
+  useEffect(() => {
+    if (!loaded) return;
+    if (previousStage.current === 0 && stageIndex > 0) {
+      previousStage.current = stageIndex;
+      return;
+    }
+    if (stageIndex > previousStage.current) {
+      setEvolutionBurst(true);
+      const timer = window.setTimeout(() => setEvolutionBurst(false), 1700);
+      previousStage.current = stageIndex;
+      return () => window.clearTimeout(timer);
+    }
+    previousStage.current = stageIndex;
+  }, [stageIndex, loaded]);
+
   const price = (item: Upgrade) => Math.ceil(item.baseCost * Math.pow(1.65, levels[item.id] ?? 0));
 
   const clickJesus = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -100,7 +118,7 @@ export default function Home() {
   return (
     <main className="game-shell">
       <section className="topbar">
-        <div className="brand"><span className="brand-spark">✦</span><span>사랑 키우기</span></div>
+        <div className="brand"><span className="brand-spark">✦</span><span>예수 키우기</span></div>
         <div className="love-total"><span>♥</span> 애정도 <strong>{fmt(love)}</strong></div>
         <button className="reset" onClick={reset} aria-label="게임 진행 초기화">↻ 처음부터</button>
       </section>
@@ -119,14 +137,14 @@ export default function Home() {
         </aside>
 
         <section className="play-area">
-          <div className="sky-deco cloud-one">☁</div><div className="sky-deco cloud-two">☁</div>
-          <div className="stage-card">
+          <div className={`stage-card stage-${stageIndex} ${evolutionBurst ? "is-evolving" : ""}`}>
             <p className="eyebrow">현재 모습 · {stageIndex + 1} / 10</p>
             <h1>{stage.title}</h1><p className="stage-mood">{stage.mood}</p>
+            {evolutionBurst && <div className="evolution-alert"><span>✦</span><b>진화 성공!</b><small>{stage.title} 해금</small></div>}
             <button className={`character-button aura-${stage.aura}`} onClick={clickJesus} aria-label={`예수님을 눌러 애정도 ${clickPower} 얻기`}>
               <span className="rays" />
               <span className="halo" />
-              <img src="/jesus.png" alt="따뜻한 그림체의 예수 캐릭터" />
+              <span className="evolution-sprite" style={{ backgroundPosition: `${stageIndex % 2 ? "100%" : "0%"} ${Math.floor(stageIndex / 2) * 25}%` }} />
               <span className="stage-ribbon">{stageIndex >= 7 ? "✦ 평화의 빛 ✦" : stageIndex >= 4 ? "따뜻한 사랑" : "작은 시작"}</span>
               {popups.map((popup) => <span className="love-popup" key={popup.id} style={{ left: popup.x, top: popup.y }}>+{popup.amount} ♥</span>)}
             </button>
@@ -138,8 +156,15 @@ export default function Home() {
           </div>
         </section>
 
-        <aside className="shop panel">
-          <div className="panel-heading"><p>BLESSING SHOP</p><h2>마음의 선물</h2><span>선물로 애정도를 더 빠르게 모아보세요.</span></div>
+      </section>
+      <div className="bottom-dock">
+        <div className="dock-stat"><span>☀</span><div><small>지금의 평온</small><b>초당 +{passivePower} 애정도</b></div></div>
+        <div className="dock-stat"><span>⚡</span><div><small>클릭 파워</small><b>한 번에 +{clickPower} 애정도</b></div></div>
+        <button className="open-shop" onClick={() => setShopOpen(true)}><span>🎁</span> 마음의 선물 상점 <i>→</i></button>
+      </div>
+      {shopOpen && <div className="shop-overlay" role="dialog" aria-modal="true" aria-label="마음의 선물 상점" onMouseDown={() => setShopOpen(false)}>
+        <section className="shop-modal" onMouseDown={(event) => event.stopPropagation()}>
+          <div className="shop-modal-head"><div><p>BLESSING SHOP</p><h2>마음의 선물</h2><span>선물로 애정도를 더 빠르게 모아보세요.</span></div><button onClick={() => setShopOpen(false)} aria-label="상점 닫기">×</button></div>
           <div className="shop-list">
             {upgrades.map((item) => {
               const cost = price(item); const level = levels[item.id] ?? 0;
@@ -148,10 +173,9 @@ export default function Home() {
               </button>;
             })}
           </div>
-          <div className="passive-note"><span>☀</span><div><b>지금의 평온</b><small>초당 <strong>+{passivePower}</strong> 애정도</small></div></div>
-        </aside>
-      </section>
-      <p className="footer-copy">사랑을 모아 따뜻한 여정을 완성해 보세요. · 진행 상황은 이 기기에 저장됩니다.</p>
+        </section>
+      </div>}
+      <p className="footer-copy">사랑을 모아 10단계의 빛나는 여정을 완성해 보세요. · 진행 상황은 이 기기에 저장됩니다.</p>
     </main>
   );
 }
