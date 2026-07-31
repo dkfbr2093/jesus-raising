@@ -69,3 +69,35 @@ button { font: inherit; }
 .intro-card > span { display:block; color:#d39a33; font-size:29px; }.intro-card h1 { margin:8px 0; font-family:Georgia,serif; font-size:42px; letter-spacing:-.1em; }.intro-card p { margin:0; color:#977565; font-size:14px; line-height:1.65; }.intro-card input { width:100%; margin-top:23px; padding:15px; border:1px solid #e5c99b; border-radius:14px; background:#fffdf8; color:var(--ink); text-align:center; font-size:17px; outline-color:#c45b50; }.intro-card > button:not(.modal-close) { width:100%; margin-top:22px; padding:16px; border:0; border-radius:15px; background:linear-gradient(135deg,#c45b50,#a33f3c); color:#fffaf1; cursor:pointer; font-weight:900; }
 .profile-card { position:relative; text-align:left; }.profile-heading { display:flex; align-items:center; gap:12px; margin:8px 0 18px; }.profile-heading > span { display:grid; place-items:center; width:48px; height:48px; border-radius:50%; background:#f9e8dc; color:#b0504a; font-size:23px; }.profile-heading h2 { margin:0; font-size:21px; }.profile-heading small { display:block; margin-top:4px; color:#9b8171; font-size:11px; }.modal-close { width:34px; height:34px; border:0; border-radius:50%; background:#f5e7d8; color:#8f6c57; cursor:pointer; font-size:24px; line-height:1; }.profile-card > .modal-close { float:right; }.record-button { display:flex; justify-content:space-between; align-items:center; width:100%; margin:0!important; padding:15px!important; background:#f5e6d6!important; color:#965448!important; text-align:left; }.record-button b { font-size:21px; }
 .record-card { text-align:left; }.record-title { display:flex; justify-content:space-between; align-items:center; margin-bottom:13px; }.record-title h2 { margin:0; font-size:23px; }.record-card ol { max-height:55vh; overflow:auto; margin:0; padding:0; list-style:none; }.record-card li { display:flex; gap:11px; padding:12px 0; border-bottom:1px solid #efdfca; }.record-card li i { display:grid; place-items:center; flex:0 0 28px; height:28px; border-radius:50%; background:#f9e8dc; color:#b0504a; font-size:11px; font-style:normal; font-weight:900; }.record-card li b,.record-card li small { display:block; }.record-card li small { margin-top:4px; color:#a28473; font-size:11px; }
+
+/* Combat sprites use square cells: avoid stretched or clipped artwork on narrow screens. */
+.evolution-sprite {
+  aspect-ratio:1;
+  height:auto !important;
+  background-image:url('/jesus-battle-sprite.png') !important;
+  background-size:200% 500% !important;
+  background-repeat:no-repeat !important;
+  mix-blend-mode:normal !important;
+}
+.battle-field { grid-template-columns:minmax(0,1fr) 42px minmax(0,1fr); min-height:264px; }
+.party-side,.boss-side { height:238px; overflow:hidden; isolation:isolate; }
+.battle-jesus {
+  left:4%; bottom:18px; width:185px; height:185px; max-width:96%; aspect-ratio:1;
+  background-image:url('/jesus-battle-sprite.png') !important;
+  background-size:200% 500% !important; background-repeat:no-repeat !important;
+}
+.battle-demon {
+  right:0; bottom:15px; width:min(100%,220px); height:220px; max-height:calc(100% - 26px);
+  aspect-ratio:1; background-repeat:no-repeat; background-size:600% 600%;
+  background-position:calc(var(--demon-column) * 20%) calc(var(--demon-row) * 20%);
+}
+@media (max-width:720px) {
+  .battle-arena { padding:16px 10px 12px; }
+  .battle-field { grid-template-columns:minmax(0,1fr) 27px minmax(0,1fr); min-height:184px; margin:4px 0 8px; }
+  .party-side,.boss-side { height:178px; }
+  .battle-jesus { left:0; bottom:21px; width:112px; height:112px; max-width:100%; }
+  .battle-demon { right:0; bottom:21px; width:132px; height:132px; max-width:100%; max-height:132px; }
+  .versus { width:26px; height:26px; margin-bottom:53px; font-size:8px; }
+  .party-side small,.boss-side small { bottom:2px; font-size:8px; }
+  .boss-side p { bottom:13px; font-size:8px; }
+}
