@@ -87,6 +87,10 @@ button { font: inherit; }
   background-size:200% 500% !important; background-repeat:no-repeat !important;
 }
 .battle-angels { display:none !important; }
+.battle-angel-party { position:absolute; z-index:3; right:2%; bottom:29px; display:flex; flex-wrap:wrap; justify-content:flex-end; gap:4px; max-width:52%; }
+.battle-angel-party i { position:relative; display:grid; place-items:center; width:30px; height:30px; border:1px solid #fff6; border-radius:50%; background:#fff8e8; box-shadow:0 4px 9px #0004; color:#8d6437; font-size:16px; font-style:normal; }
+.battle-angel-party i small { position:absolute; right:-4px; bottom:-5px; min-width:15px; border-radius:7px; background:#c65e50; color:#fff; font-size:7px; line-height:12px; }
+.victory-panel .return-button { margin-left:4px; background:#6d556a; }
 .battle-demon {
   right:0; bottom:15px; width:min(100%,220px); height:220px; max-height:calc(100% - 26px);
   aspect-ratio:1; background-repeat:no-repeat; background-size:600% 600%;
@@ -98,6 +102,8 @@ button { font: inherit; }
   .party-side,.boss-side { height:178px; }
   .battle-jesus { left:0; bottom:21px; width:min(112px,100%); height:auto; }
   .battle-demon { right:0; bottom:21px; width:132px; height:132px; max-width:100%; max-height:132px; }
+  .battle-angel-party { right:0; bottom:27px; gap:3px; max-width:50%; }
+  .battle-angel-party i { width:24px; height:24px; font-size:13px; }
   .versus { width:26px; height:26px; margin-bottom:53px; font-size:8px; }
   .party-side small,.boss-side small { bottom:2px; font-size:8px; }
   .boss-side p { bottom:13px; font-size:8px; }
