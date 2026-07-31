@@ -19,7 +19,7 @@ const angels: Angel[] = [
 const demonOrder = ["안드로말리우스", "단탈리온", "데카라비아", "무르무르", "보알", "베파르", "포칼로르", "라움", "말파스", "페넥스", "푸르푸르", "가프", "아스모데우스", "아스타로트", "로노베", "부네", "나베리우스", "모락스", "푸르손", "바신", "엘리고스", "레라지에", "부에르", "파이몬", "바르바토스", "아몬", "발레포르", "마르바스", "가미긴", "바사고", "아가레스", "바알"];
 const colors = ["#4e638b", "#80577e", "#80434d", "#5d4b78", "#396875", "#754344", "#396681", "#617248"];
 const icons = ["☾", "✧", "♜", "♞", "♝", "♛", "☍", "♚"];
-const dungeons = demonOrder.map((name, index) => ({ name, epithet: index === demonOrder.length - 1 ? "72악마의 마지막 왕" : `${index + 1}번째 심연의 봉인`, icon: icons[index % icons.length], hp: Math.round(170 * Math.pow(1.31, index)), reward: Math.round(42 * Math.pow(1.29, index)), stage: Math.floor(index * 10 / demonOrder.length), color: colors[index % colors.length] }));
+const dungeons = demonOrder.map((name, index) => ({ name, epithet: index === demonOrder.length - 1 ? "72악마의 마지막 왕" : `${index + 1}번째 심연의 봉인`, icon: icons[index % icons.length], hp: Math.round(900 * Math.pow(1.34, index)), reward: Math.round(42 * Math.pow(1.29, index)), stage: Math.floor(index * 10 / demonOrder.length), color: colors[index % colors.length] }));
 const fmt = (value: number) => new Intl.NumberFormat("ko-KR").format(Math.floor(value));
 const date = (value: string) => new Intl.DateTimeFormat("ko-KR", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value));
 
