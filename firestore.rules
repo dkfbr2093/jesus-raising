@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /rankings/{userId} {
+      allow read: if true;
+      allow create: if request.auth != null && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['nickname', 'bestLove', 'stage', 'updatedAt'])
+        && request.resource.data.nickname is string && request.resource.data.nickname.size() >= 1 && request.resource.data.nickname.size() <= 12
+        && request.resource.data.bestLove is int && request.resource.data.bestLove >= 0
+        && request.resource.data.stage is int && request.resource.data.stage >= 1 && request.resource.data.stage <= 10;
+      allow update: if request.auth != null && request.auth.uid == userId
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['nickname', 'bestLove', 'stage', 'updatedAt'])
+        && request.resource.data.nickname is string && request.resource.data.nickname.size() >= 1 && request.resource.data.nickname.size() <= 12
+        && request.resource.data.bestLove is int && request.resource.data.bestLove >= resource.data.bestLove
+        && request.resource.data.stage is int && request.resource.data.stage >= resource.data.stage && request.resource.data.stage <= 10;
+      allow delete: if false;
+    }
+  }
+}
