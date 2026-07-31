@@ -7,6 +7,7 @@
 .bottom-dock { bottom:calc(10px + env(safe-area-inset-bottom)) !important; }
 .character-button { touch-action:manipulation; }
 .character-button { background:#fffdfa!important; border-radius:0!important; clip-path:none!important; }
+.stage-card { border-radius:0!important; }
 .rays,.halo { display:none!important; }
 .character-button { outline:none!important; -webkit-tap-highlight-color:transparent!important; background:transparent!important; overflow:visible!important; clip-path:polygon(39% 7%,58% 7%,70% 17%,74% 34%,69% 48%,78% 67%,69% 94%,32% 94%,21% 68%,30% 49%,25% 33%,29% 17%)!important; }
 .evolution-sprite { mix-blend-mode:multiply!important; }
